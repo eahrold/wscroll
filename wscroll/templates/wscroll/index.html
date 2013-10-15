@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block nav %}
+{% include "wscroll/nav.html" %}
+{% endblock %}
+{% load bootstrap_toolkit %}
+
+{% block content %}
+<table class="client_info table table-striped table-condensed table-bordered">
+<h4>Web Page Collections</h4>
+<tbody>
+	{% if collections %}
+	
+    {% for c in collections %}
+	<tr>
+		<th><a href={% url "collection_edit" c.id %}>{{ c.name }}</a>{% csrf_token %}</th>
+		<td><a href={% url "collection_details" c.id %}>number of pages in collection: {{c.url.count}}</a>
+		<td><a href={% url "collection_delete" c.id %}>Remove</a></td>
+	</tr>
+    {% endfor %}
+	{% endif %}
+</tbody>
+</table>
+	<form class="form-inline" role="form" action={%url "collection_add_from_index" %} method="post">{% csrf_token %}
+			{{ colform|as_bootstrap }}
+			<button type="submit" class="btn btn-small">Add</button>
+	</form>
+</br>
+</br>
+</br>
+<table class="client_info table table-striped table-condensed table-bordered">
+	<h4>Web Pages</h4>
+    <tbody>
+	{% if pages %}	
+    {% for p in pages %}	
+		<tr>
+			<th><a href={{p.url}}>{{ p.url }}</th>
+			<td><a href={% url "page_delete" p.id %}>Remove</a></td>
+		</tr>	
+    {% endfor %}
+	{% endif %}
+	</tbody>
+</table>
+<form class="form-inline" role="form" action={%url "page_add" %} method="post">{% csrf_token %}
+	<div class="form-group">
+		{{ wpform|as_bootstrap }}
+		<button type="submit" class="btn btn-small">Add</button>
+	</div>
+</form>
+
+{% endblock %}
+{% block footer %}
+{% include "wscroll/footer.html" %}
+{% endblock %}

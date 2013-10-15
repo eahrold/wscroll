@@ -1,0 +1,13 @@
+<!-- <li><a href={%url "page_add" %}>Add Page</a></li>
+<li><a href={%url "collection_add" %}>Add List</a></li> -->
+
+<li class="dropdown"><a class="dropdown-toggle" id="dLabel" data-toggle="dropdown" data-target="#" href="#">
+manage
+<b class="caret"></b>
+</a>
+<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+<li><a href={% url "page_add" %}>Add Page</a></li>
+<li><a href={% url "collection_add" %}>Add Collection</a></li>
+
+</ul>
+</li>
