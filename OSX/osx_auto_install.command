@@ -5,7 +5,7 @@ export PATH="$PATH:/usr/local/bin:/usr/local/sbin:/Applications/Xcode.app/Conten
 
 PROJECT_NAME='wscroll'
 PROJECT_SETTINGS_DIR="server"
-EXAMPLE_SETTINGS_FILE="settings_example.py"
+EXAMPLE_SETTINGS_FILE="settings_template.py"
 
 GIT_REPO="https://github.com/eahrold/wscroll.git"
 GIT_BRANCH="devel"
@@ -141,7 +141,7 @@ configure(){
 	local SETTINGS_FILE="${PROJECT_SETTINGS_DIR}settings.py"
 	cecho purple "Now we'll do some basic configuring to the settings.py file"
 	
-	local _seckey=$(LC_CTYPE=C tr -dc A-Za-z0-9_\!\@\#\$\%\^\&\*\(\)-+= < /dev/urandom | head -c 50 | xargs)
+	local _seckey=$(LC_CTYPE=C tr -dc A-Za-z0-9_\!\@\#\$\%\^\*\(\)-+= < /dev/urandom | head -c 50 | xargs)
 	ised "SECRET_KEY =" "SECRET_KEY = '${_seckey}'" "${SETTINGS_FILE}"
 		
 	while true; do
